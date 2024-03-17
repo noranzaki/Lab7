@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block 'content' %}
+<h1> Author Details </h1>
+
+
+<div class="card mb-3">
+  <img src="{{ author.image_url }}" width="200" height="600"
+       class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Name: {{author.name}}</h5>
+    <h5 class="card-title">Birth Date: {{author.birthdate}}</h5>
+    <h2>Books Own:  </h2>
+    <ul>
+      {% for book in books %}
+          <li>{{ book.name }}</li>
+      {% endfor %}
+  </ul>
+
+  </div>
+</div>
+<a  href="{% url 'AllAuthors' %}">back to All Authors</a>
+{% endblock %}

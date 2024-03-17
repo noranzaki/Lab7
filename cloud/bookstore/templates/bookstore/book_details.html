@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block 'content' %}
+<h1> Book Details </h1>
+
+<div class="card mb-3">
+  <img src="{{ book.image_url }}" width="200" height="600"
+       class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Name: {{book.name}}</h5>
+    <h5 class="card-title">Price: {{book.price}}</h5>
+    <h5 class="card-title">Author:  <a href="{{book.author.details_url}}"> {{book.author}}</a></h5>
+    <h5 class="card-title">Num of Pages: {{book.numpages}}</h5>
+    <h5 class="card-title">Created at: {{book.created_at}}</h5>
+    <h5 class="card-title">Updated at: {{book.updated_at}}</h5>
+
+  </div>
+</div>
+<h1> Other Books for this author </h1>
+  {{book.author.authors.all}}
+  {% for b in book.author.books.all %}
+      {% if b.id != book.id %}
+      <h3> <a href="{{ b.show_url }}"> {{b.name}} </a></h3>
+      {% endif %}
+      {% empty %}
+      <p>No other books found for this author.</p>
+     {% endfor %}
+<a  href="{% url 'AllBooks' %}">back to All Books</a>
+{% endblock %}
